@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Ethminer Stats</title>
+    <link rel="stylesheet" href="./style.css">
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script>if (window.module) module = window.module;</script>
+    <script src="./main.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Ethminer Stats</h1>
+      <p>Ethminer.org API Client</p>
+    </header>
+
+    <div>
+      
+      <div class="price">
+
+        <div class="usd">
+          USD $<span></span>
+        </div>
+
+        <div class="btc">
+          BTC <span></span>
+        </div>
+      </div>
+
+      <div class="pool-stats">
+
+        <div class="hash-rate">
+          <span></span> TH/s
+        </div>
+
+        <div class="miners">
+          <span></span> Miners
+        </div>
+
+        <div class="workers">
+          <span></span> Workers
+        </div>
+
+        <div class="blocks">
+          <span></span> Blocks/Hour
+        </div>
+        
+      </div>
+
+      <div class="network-stats">
+
+        <div class="hash-rate">
+          <span></span> TH/s
+        </div>
+
+        <div class="difficulty">
+          <span></span>
+        </div>
+
+        <div class="block-time">
+          <span></span>
+        </div>
+
+      </div>
+
+      <div class="chart">
+        <canvas id="myChart" width="400" height="400"></canvas>
+      </div>
+
+    </div>
+
+    <footer>
+    </footer>
+  </body>
+</html>
