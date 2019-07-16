@@ -3,6 +3,7 @@ const { Chart } = require('chart.js');
 
 const API_ENDPOINT = 'https://api.ethermine.org';
 const MINER_ADDR = '0x0C4beC0CF7aA3e3562d0f56558829C348646861b';
+const BUBBLE_UP = new Audio('./assets/sounds/bubble.mp3');
 
 
 $(()=>{
@@ -13,9 +14,14 @@ $(()=>{
     // load ethminer network stats
     loadNetworkStats();
 
+    // load miner stats
+    loadMinerStats();
+
     // plot chart
     plotLineChart();
   
+    // play sound every 2 minutes
+    window.setInterval(cheerup, 120000);
 });
 
 function loadPoolStats() {
@@ -88,4 +94,51 @@ function plotLineChart() {
             }
         }
     });
+}
+
+
+function loadMinerStats() {
+    $.getJSON(
+        API_ENDPOINT + '/miner/' + MINER_ADDR + '/currentStats',
+        {},
+        (data) => {
+            if (data.status === 'OK' ) {
+                $('.miner-stats .hash-rate span').text(Math.round(100 * data.data.averageHashrate / 1000000) / 100);
+                $('.miner-stats .workers span').text(data.data.activeWorkers);
+                $('.miner-stats .valid-shares span').text(data.data.validShares);
+                $('.miner-stats .stale-shares span').text(data.data.staleShares);
+                $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
+                $('.miner-stats .last-seen span').text(timestampToDate(data.data.lastSeen));
+
+                // Unpaid balance (in base units) of the miner
+                $('.miner-stats .unpaid span').text(data.data.unpaid);
+            }
+        }
+    );
+}
+
+function timestampToDate(unix_timestamp) {
+
+    var date = new Date(unix_timestamp * 1000);
+
+    return date.toTimeString() + ' on ' + date.toDateString();
+}
+
+function cheerup() {
+    const prev_val = Number($('.miner-stats .unpaid span').text());
+    $.getJSON(
+        API_ENDPOINT + '/miner/' + MINER_ADDR + '/currentStats',
+        {},
+        (data) => {
+            if (data.status === 'OK' ) {
+                // Unpaid balance (in base units) of the miner
+                $('.miner-stats .unpaid span').text(data.data.unpaid);
+                const curr_val = Number($('.miner-stats .unpaid span').text());
+
+                if ( curr_val > prev_val ) {
+                    BUBBLE_UP.play();
+                }
+            }
+        }
+    );
 }
