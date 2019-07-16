@@ -47,8 +47,16 @@ function loadNetworkStats() {
         (data) => {
             if (data.status === 'OK' ) {
                 $('.network-stats .hash-rate span').text(Math.round(100 * data.data.hashrate / 1000000000000) / 100);
-                $('.network-stats .difficulty span').text(data.data.difficulty);
-                $('.network-stats .block-time span').text(data.data.blockTime);
+                $('.network-stats .difficulty span').text(
+                    Math.floor(
+                        100 * data.data.difficulty / 1000000000000
+                    ) / 100
+                );
+                $('.network-stats .block-time span').text(
+                    Math.floor(
+                        100 * data.data.blockTime
+                    ) / 100
+                );
             }
         }
     );
