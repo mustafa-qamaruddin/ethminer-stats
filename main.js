@@ -69,6 +69,26 @@ function loadMinerStats() {
 
                 // Unpaid balance (in base units) of the miner
                 $('.miner-stats .unpaid span').text(data.data.unpaid);
+
+                const eth_val = Math.floor(
+                    100000 * data.data.unpaid / 1000000000000000000
+                ) / 100000;
+
+                $('.miner-stats .unpaid-eth span').text(eth_val);
+
+                const btc_price = $('.price .btc span').text();
+                const usd_price = $('.price .usd span').text();
+
+                $('.miner-stats .unpaid-btc span').text(
+                    Math.floor(
+                        1000000 * eth_val * btc_price
+                    ) / 1000000
+                );
+                $('.miner-stats .unpaid-usd span').text(
+                    Math.floor(
+                        1000000 * eth_val * usd_price
+                    ) / 1000000
+                );
             }
         }
     );
@@ -109,6 +129,26 @@ function updateMinerStats() {
                 $('.miner-stats .stale-shares span').text(data.data.staleShares);
                 $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
                 $('.miner-stats .last-seen span').text(timestampToDate(data.data.lastSeen));
+
+                const eth_val = Math.floor(
+                    100000 * data.data.unpaid / 1000000000000000000
+                ) / 100000;
+
+                $('.miner-stats .unpaid-eth span').text(eth_val);
+
+                const btc_price = $('.price .btc span').text();
+                const usd_price = $('.price .usd span').text();
+
+                $('.miner-stats .unpaid-btc span').text(
+                    Math.floor(
+                        1000000 * eth_val * btc_price
+                    ) / 1000000
+                );
+                $('.miner-stats .unpaid-usd span').text(
+                    Math.floor(
+                        1000000 * eth_val * usd_price
+                    ) / 1000000
+                );
             }
         }
     );
