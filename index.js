@@ -13,9 +13,9 @@ function createWindow () {
   let win = new BrowserWindow({
     width: 800,
     height: 600,
-    // fullscreen: true,
+    fullscreen: true,
     backgroundColor: '#828aff',
-    // frame: false,
+    frame: false,
     show: false,
     webPreferences: {
       nodeIntegration: true

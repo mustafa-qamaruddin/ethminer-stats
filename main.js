@@ -1,12 +1,13 @@
-const { Chart } = require('chart.js');
-
-
 const API_ENDPOINT = 'https://api.ethermine.org';
 const MINER_ADDR = '0x0C4beC0CF7aA3e3562d0f56558829C348646861b';
 const BUBBLE_UP = new Audio('./assets/sounds/bubble.mp3');
+const CRASH_DOWN = new Audio('./assets/sounds/crash.mp3');
 
 
 $(()=>{
+
+    // update miner address in description
+    $('.jumbotron p span').text(MINER_ADDR);
 
     // load ethminer pool stats
     loadPoolStats();
@@ -17,11 +18,8 @@ $(()=>{
     // load miner stats
     loadMinerStats();
 
-    // plot chart
-    plotLineChart();
-  
     // play sound every 2 minutes
-    window.setInterval(cheerup, 120000);
+    window.setInterval(updateMinerStats, 120000);
 });
 
 function loadPoolStats() {
@@ -56,47 +54,6 @@ function loadNetworkStats() {
     );
 }
 
-function plotLineChart() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-            datasets: [{
-                label: '# of Votes',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-}
-
-
 function loadMinerStats() {
     $.getJSON(
         API_ENDPOINT + '/miner/' + MINER_ADDR + '/currentStats',
@@ -124,8 +81,9 @@ function timestampToDate(unix_timestamp) {
     return date.toTimeString() + ' on ' + date.toDateString();
 }
 
-function cheerup() {
+function updateMinerStats() {
     const prev_val = Number($('.miner-stats .unpaid span').text());
+    const prev_workers = Number($('.miner-stats .workers span').text());
     $.getJSON(
         API_ENDPOINT + '/miner/' + MINER_ADDR + '/currentStats',
         {},
@@ -138,6 +96,19 @@ function cheerup() {
                 if ( curr_val > prev_val ) {
                     BUBBLE_UP.play();
                 }
+
+                $('.miner-stats .workers span').text(data.data.activeWorkers);
+                const curr_workers = Number($('.miner-stats .workers span').text());
+
+                if ( curr_workers < prev_workers ) {
+                    CRASH_DOWN.play();
+                }
+
+                $('.miner-stats .hash-rate span').text(Math.round(100 * data.data.averageHashrate / 1000000) / 100);
+                $('.miner-stats .valid-shares span').text(data.data.validShares);
+                $('.miner-stats .stale-shares span').text(data.data.staleShares);
+                $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
+                $('.miner-stats .last-seen span').text(timestampToDate(data.data.lastSeen));
             }
         }
     );
