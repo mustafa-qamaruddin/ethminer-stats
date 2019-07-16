@@ -7,7 +7,7 @@ const CRASH_DOWN = new Audio('./assets/sounds/crash.mp3');
 $(()=>{
 
     // update miner address in description
-    $('.jumbotron p span').text(MINER_ADDR);
+    $('.miner-addr .address span').text(MINER_ADDR);
 
     // load ethminer pool stats
     loadPoolStats();
@@ -65,7 +65,7 @@ function loadMinerStats() {
                 $('.miner-stats .valid-shares span').text(data.data.validShares);
                 $('.miner-stats .stale-shares span').text(data.data.staleShares);
                 $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
-                $('.miner-stats .last-seen span').text(timestampToDate(data.data.lastSeen));
+                $('.last-seen span').text(timestampToDate(data.data.lastSeen));
 
                 // Unpaid balance (in base units) of the miner
                 $('.miner-stats .unpaid span').text(data.data.unpaid);
@@ -128,7 +128,7 @@ function updateMinerStats() {
                 $('.miner-stats .valid-shares span').text(data.data.validShares);
                 $('.miner-stats .stale-shares span').text(data.data.staleShares);
                 $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
-                $('.miner-stats .last-seen span').text(timestampToDate(data.data.lastSeen));
+                $('.last-seen span').text(timestampToDate(data.data.lastSeen));
 
                 const eth_val = Math.floor(
                     100000 * data.data.unpaid / 1000000000000000000

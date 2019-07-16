@@ -1,4 +1,4 @@
-.jumbotron p span {
+.miner-addr p span {
     font-weight: bold;
     font-style: italic;
 }
@@ -6,20 +6,32 @@
 .number-circle {
 }
 
-.section {
-    background-color: #eceff1;
-    border-radius: 1em;
-    margin: 0.5em;
-    padding: 1em;
-}
-
-.section-title {
-    font-weight: bold;
-}
-
 .section .col {
-    background-color: rgb(122, 151, 83);
-    border-radius: 0.5em;
-    margin: 0.5em;
-    padding: 1em;
+    position: relative;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+    width:auto;
+    margin: 0.4rem 1.25rem;
+    padding: 0rem 1.25rem;
+}
+
+.section-title
+{
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+.row-cutsom
+{
+    padding-top: 5px !important;
+    padding-bottom: 5px;
+}
+
+p
+{
+    margin-bottom: 0.2rem !important;
 }
