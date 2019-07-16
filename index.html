@@ -24,88 +24,131 @@
         <p>Ethminer.org API Client for Miner <span></span></p>
       </div>
       
-      <div class="row price">
+      <div class="row price section">
 
-        <div class="usd">
-          USD $<span class="number-circle"></span>
+        <div class="row section-title">
+          Ethereum Price
         </div>
 
-        <div class="btc">
-          BTC <span></span>
+        <div class="row">
+
+          <div class="col usd">
+            USD $<span class="number-circle"></span>
+          </div>
+
+          <div class="col btc">
+            BTC ₿<span></span>
+          </div>
+
         </div>
 
       </div>
 
-      <div class="row pool-stats">
+      <div class="row miner-stats section">
 
-        <div class="hash-rate">
-          <span></span> TH/s
+        <div class="row section-title">
+          Miner Stats
         </div>
 
-        <div class="miners">
-          <span></span> Miners
+        <div class="row">
+          <div class="col hash-rate">
+            <span></span> MH/s
+          </div>
+
+          <div class="col workers">
+            <span></span> Active Workers
+          </div>
+
+          <div class="col valid-shares">
+            <span></span> Valid Shares
+          </div>
+
+          <div class="col stale-shares">
+            <span></span> Stale Shares
+          </div>
+
+          <div class="col invalid-shares">
+            <span></span> Invalid Shares
+          </div>
+
+          <div class="col unpaid">
+            <span></span> Base Units
+          </div>
+
+          <div class="col unpaid-eth">
+            ETH Ξ<span></span>
+          </div>
+
+          <div class="col unpaid-usd">
+            USD $<span></span>
+          </div>
+
+          <div class="col unpaid-btc">
+            BTC ₿<span></span>
+          </div>
+
         </div>
 
-        <div class="workers">
-          <span></span> Workers
+        <div class="row">
+
+          <div class="col last-seen">
+            Last Seen @ <span></span>
+          </div>
+
         </div>
 
-        <div class="blocks">
-          <span></span> Blocks/Hour
+      </div>
+
+      <div class="row pool-stats section">
+
+        <div class="row section-title">
+          Pool Stats
+        </div>
+
+        <div class="row">
+        
+          <div class="col hash-rate">
+            <span></span> TH/s
+          </div>
+
+          <div class="col miners">
+            <span></span> Miners
+          </div>
+
+          <div class="col workers">
+            <span></span> Workers
+          </div>
+
+          <div class="col blocks">
+            <span></span> Blocks/Hour
+          </div>
+
         </div>
         
       </div>
 
-      <div class="row network-stats">
+      <div class="row network-stats section">
 
-        <div class="hash-rate">
-          <span></span> TH/s
+        <div class="row section-title">
+          Network Stats
         </div>
 
-        <div class="difficulty">
-          <span></span>
+        <div class="row">
+        
+          <div class="col hash-rate">
+            <span></span> TH/s
+          </div>
+
+          <div class="col difficulty">
+            <span></span>
+          </div>
+
+          <div class="col block-time">
+            <span></span>
+          </div>
+
         </div>
 
-        <div class="block-time">
-          <span></span>
-        </div>
-
-      </div>
-
-      <div class="row miner-stats">
-
-        <div class="hash-rate">
-          <span></span> MH/s
-        </div>
-
-        <div class="workers">
-          <span></span> Active Workers
-        </div>
-
-        <div class="valid-shares">
-          <span></span> Valid Shares
-        </div>
-
-        <div class="stale-shares">
-          <span></span> Stale Shares
-        </div>
-
-        <div class="invalid-shares">
-          <span></span> Invalid Shares
-        </div>
-
-        <div class="unpaid">
-          <span></span> ETH
-        </div>
-
-        <div class="last-seen">
-          Last Seen @ <span></span>
-        </div>
-
-      </div>
-
-      <div class="chart">
-        <canvas id="myChart" width="400" height="400"></canvas>
       </div>
 
     </div>

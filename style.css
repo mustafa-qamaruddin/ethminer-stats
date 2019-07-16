@@ -4,15 +4,22 @@
 }
 
 .number-circle {
-    border-radius: 50%;
-    behavior: url(PIE.htc);
-    /* remove if you don't care about IE8 */
-    width: 36px;
-    height: 36px;
-    padding: 8px;
-    background: #fff;
-    border: 2px solid #666;
-    color: #666;
-    text-align: center;
-    font: 32px Arial, sans-serif;
+}
+
+.section {
+    background-color: #eceff1;
+    border-radius: 1em;
+    margin: 0.5em;
+    padding: 1em;
+}
+
+.section-title {
+    font-weight: bold;
+}
+
+.section .col {
+    background-color: rgb(122, 151, 83);
+    border-radius: 0.5em;
+    margin: 0.5em;
+    padding: 1em;
 }
