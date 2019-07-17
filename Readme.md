@@ -17,3 +17,7 @@ $ npm start
 #### Disclaimer
 
 This app is for internal use only and works on Full Screen for Indoors Ethereum Mining Monitoring
+
+#### GUI
+
+[![ethminer-stats.jpg](https://i.postimg.cc/g0MsTKG7/ethminer-stats.jpg)](https://postimg.cc/PLw1LYpb)
