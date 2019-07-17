@@ -18,8 +18,8 @@ $(()=>{
     // load miner stats
     loadMinerStats();
 
-    // play sound every 2 minutes
-    window.setInterval(updateMinerStats, 840000);
+    // play sound every 1 minute
+    window.setInterval(updateMinerStats, 60000);
 });
 
 function loadPoolStats() {
@@ -122,7 +122,7 @@ function timestampToDate(unix_timestamp) {
 
 function updateMinerStats() {
     const prev_val = Number($('.miner-stats .unpaid span').text());
-    const prev_workers = Number($('.miner-stats .workers span').text());
+    const prev_workers = Number($('.miner-stats #active-workers').text());
     $.getJSON(
         API_ENDPOINT + '/miner/' + MINER_ADDR + '/currentStats',
         {},
