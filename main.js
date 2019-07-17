@@ -75,11 +75,11 @@ function loadMinerStats() {
         {},
         (data) => {
             if (data.status === 'OK' ) {
-                $('.miner-stats .hash-rate span').text(Math.round(100 * data.data.averageHashrate / 1000000) / 100);
-                $('.miner-stats .workers span').text(data.data.activeWorkers);
-                $('.miner-stats .valid-shares span').text(data.data.validShares);
-                $('.miner-stats .stale-shares span').text(data.data.staleShares);
-                $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
+                $('.miner-stats #hash-rate').text(Math.round(100 * data.data.averageHashrate / 1000000) / 100);
+                $('.miner-stats #active-workers').text(data.data.activeWorkers);
+                $('.miner-stats #valid-shares').text(data.data.validShares);
+                $('.miner-stats #stale-shares').text(data.data.staleShares);
+                $('.miner-stats #invalid-shares').text(data.data.invalidShares);
                 $('.last-seen span').text(timestampToDate(data.data.lastSeen));
 
                 // $('.miner-stats .hash-rate span').animate({borderColor:'red'}, 400)
@@ -136,17 +136,17 @@ function updateMinerStats() {
                     BUBBLE_UP.play();
                 }
 
-                $('.miner-stats .workers span').text(data.data.activeWorkers);
-                const curr_workers = Number($('.miner-stats .workers span').text());
+                $('.miner-stats #active-workers').text(data.data.activeWorkers);
+                const curr_workers = Number($('.miner-stats #active-workers').text());
 
                 if ( curr_workers < prev_workers ) {
                     CRASH_DOWN.play();
                 }
 
-                $('.miner-stats .hash-rate span').text(Math.round(100 * data.data.averageHashrate / 1000000) / 100);
-                $('.miner-stats .valid-shares span').text(data.data.validShares);
-                $('.miner-stats .stale-shares span').text(data.data.staleShares);
-                $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
+                $('.miner-stats #hash-rate').text(Math.round(100 * data.data.averageHashrate / 1000000) / 100);
+                $('.miner-stats #valid-shares').text(data.data.validShares);
+                $('.miner-stats #stale-shares').text(data.data.staleShares);
+                $('.miner-stats #invalid-shares').text(data.data.invalidShares);
                 $('.last-seen span').text(timestampToDate(data.data.lastSeen));
 
                 $( '.miner-stats' ).fadeOut( "slow");
