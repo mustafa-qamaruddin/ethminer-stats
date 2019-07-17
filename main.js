@@ -8,6 +8,14 @@ $(()=>{
 
     // update miner address in description
     $('.miner-addr .address span').text(MINER_ADDR);
+    $( '.miner-stats' ).fadeOut( "slow");
+    $( '.miner-stats' ).fadeIn( "slow");
+    // $(".miner-stats").animate({
+    //     opacity: '0.5',
+    //   });
+    $(".miner-stats").animate({
+        opacity: '1',
+      });
 
     // load ethminer pool stats
     loadPoolStats();
@@ -19,7 +27,7 @@ $(()=>{
     loadMinerStats();
 
     // play sound every 2 minutes
-    window.setInterval(updateMinerStats, 120000);
+    window.setInterval(updateMinerStats, 840000);
 });
 
 function loadPoolStats() {
@@ -82,6 +90,10 @@ function loadMinerStats() {
                 $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
                 $('.last-seen span').text(timestampToDate(data.data.lastSeen));
 
+                // $('.miner-stats .hash-rate span').animate({borderColor:'red'}, 400)
+                // .delay(400)
+                // .animate({borderColor:'black'}, 1000);
+                
                 // Unpaid balance (in base units) of the miner
                 $('.miner-stats .unpaid span').text(data.data.unpaid);
 
@@ -145,6 +157,10 @@ function updateMinerStats() {
                 $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
                 $('.last-seen span').text(timestampToDate(data.data.lastSeen));
 
+                $('.miner-stats .hash-rate span').animate({borderColor:'red'}, 400)
+                .delay(400)
+                .animate({borderColor:'black'}, 1000);
+
                 const eth_val = Math.floor(
                     100000 * data.data.unpaid / 1000000000000000000
                 ) / 100000;
@@ -172,7 +188,10 @@ function updateMinerStats() {
 function calcTopMinersStats(top_miners) {
     let obj = new topMinerCallbackClass();
     for ( let i in top_miners ) {
-        sleep(3000000)
+        //sleep for 5 minutes
+        setTimeout(function(){ 
+        }, 6000000); 
+
         $.getJSON(
             API_ENDPOINT + '/miner/' + top_miners[i] + '/currentStats',
             {},
