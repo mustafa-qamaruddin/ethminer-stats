@@ -172,6 +172,7 @@ function updateMinerStats() {
 function calcTopMinersStats(top_miners) {
     let obj = new topMinerCallbackClass();
     for ( let i in top_miners ) {
+        sleep(3000000)
         $.getJSON(
             API_ENDPOINT + '/miner/' + top_miners[i] + '/currentStats',
             {},
