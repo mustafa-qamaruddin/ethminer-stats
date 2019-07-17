@@ -2,7 +2,7 @@
 
 ### Electron.JS App
 
-Dashboard for Ethereum Mining Stats and Draws Comparison with Top Miners on Ethminer.org Pool
+Dashboard for Ethereum Mining Stats and Draws Comparison with Top Miners on Ethminer.org Pool with Sound Efffect on Mined Blocks and Workers Crash.
 
 #### Usage
 
