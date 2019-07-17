@@ -193,6 +193,18 @@ function topMinerCallbackClass() {
     this.sum_valid_shares = 0;
     this.average_valid_shares = 0;
 
+    // stale shares
+     this.sum_stale_shares = 0;
+     this.average_stale_shares = 0;
+
+    // valid shares
+    this.sum_invalid_shares = 0;
+    this.average_invalid_shares = 0;
+
+    // active workrs
+    this.sum_active_workers = 0;    
+    this.average_active_workers = 0;
+
     this.topMinerCallback = function(data) {
         this.num_miners++;
 
@@ -205,5 +217,20 @@ function topMinerCallbackClass() {
         this.sum_valid_shares += data.data.validShares;
         this.average_valid_shares = this.sum_valid_shares / this.num_miners;
         $('#top_avg_valid_shares').text(this.average_valid_shares);
+        
+        // average stale shares
+        this.sum_stale_shares += data.data.staleShares;
+        this.average_stale_shares = this.sum_stale_shares / this.num_miners;
+        $('#top_avg_stale_shares').text(this.average_stale_shares);
+
+        // average invalid shares
+        this.sum_invalid_shares += data.data.invalidShares;
+        this.average_invalid_shares = this.sum_invalid_shares / this.num_miners;
+        $('#top_avg_invalid_shares').text(this.average_invalid_shares);
+
+        // average active workers
+        this.sum_active_workers += data.data.activeWorkers;
+        this.average_active_workers = this.sum_active_workers / this.num_miners;
+        $('#top_avg_active_workers').text(this.average_active_workers);
     }
 }
