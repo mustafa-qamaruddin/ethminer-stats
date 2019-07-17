@@ -238,7 +238,7 @@ function topMinerCallbackClass() {
         // average stale shares
         this.sum_stale_shares += data.data.staleShares;
         this.average_stale_shares = this.sum_stale_shares / this.num_miners;
-        $('#top_avg_stale_shares').textMath.round((this.average_stale_shares));
+        $('#top_avg_stale_shares').text(Math.round(this.average_stale_shares));
 
         // average invalid shares
         this.sum_invalid_shares += data.data.invalidShares;
