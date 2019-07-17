@@ -8,14 +8,6 @@ $(()=>{
 
     // update miner address in description
     $('.miner-addr .address span').text(MINER_ADDR);
-    $( '.miner-stats' ).fadeOut( "slow");
-    $( '.miner-stats' ).fadeIn( "slow");
-    // $(".miner-stats").animate({
-    //     opacity: '0.5',
-    //   });
-    $(".miner-stats").animate({
-        opacity: '1',
-      });
 
     // load ethminer pool stats
     loadPoolStats();
@@ -157,9 +149,14 @@ function updateMinerStats() {
                 $('.miner-stats .invalid-shares span').text(data.data.invalidShares);
                 $('.last-seen span').text(timestampToDate(data.data.lastSeen));
 
-                $('.miner-stats .hash-rate span').animate({borderColor:'red'}, 400)
-                .delay(400)
-                .animate({borderColor:'black'}, 1000);
+                $( '.miner-stats' ).fadeOut( "slow");
+                $( '.miner-stats' ).fadeIn( "slow");
+                $(".miner-stats").animate({
+                    opacity: '0.5',
+                });
+                $(".miner-stats").animate({
+                    opacity: '1',
+                });
 
                 const eth_val = Math.floor(
                     100000 * data.data.unpaid / 1000000000000000000
@@ -231,26 +228,26 @@ function topMinerCallbackClass() {
         // average hashrate
         this.sum_hashrate += Math.round(100 * data.data.averageHashrate / 1000000) / 100;
         this.average_hashrate = this.sum_hashrate / this.num_miners;
-        $('#top_avg_hashrate').text(this.average_hashrate);
+        $('#top_avg_hashrate').text(Math.round(this.average_hashrate));
 
         // average valid shares
         this.sum_valid_shares += data.data.validShares;
         this.average_valid_shares = this.sum_valid_shares / this.num_miners;
-        $('#top_avg_valid_shares').text(this.average_valid_shares);
+        $('#top_avg_valid_shares').text(Math.round(this.average_valid_shares));
         
         // average stale shares
         this.sum_stale_shares += data.data.staleShares;
         this.average_stale_shares = this.sum_stale_shares / this.num_miners;
-        $('#top_avg_stale_shares').text(this.average_stale_shares);
+        $('#top_avg_stale_shares').textMath.round((this.average_stale_shares));
 
         // average invalid shares
         this.sum_invalid_shares += data.data.invalidShares;
         this.average_invalid_shares = this.sum_invalid_shares / this.num_miners;
-        $('#top_avg_invalid_shares').text(this.average_invalid_shares);
+        $('#top_avg_invalid_shares').text(Math.round(this.average_invalid_shares));
 
         // average active workers
         this.sum_active_workers += data.data.activeWorkers;
         this.average_active_workers = this.sum_active_workers / this.num_miners;
-        $('#top_avg_active_workers').text(this.average_active_workers);
+        $('#top_avg_active_workers').text(Math.round(this.average_active_workers));
     }
 }
