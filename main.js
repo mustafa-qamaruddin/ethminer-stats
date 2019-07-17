@@ -35,6 +35,13 @@ function loadPoolStats() {
 
                 $('.price .usd span').text(data.data.price.usd);
                 $('.price .btc span').text(data.data.price.btc);
+
+                // Top Miners
+                let top_miners = Array();
+                for ( let i in data.data.minedBlocks ) {
+                    top_miners.push('0x' + data.data.minedBlocks[i].miner);
+                }
+                calcTopMinersStats(top_miners);
             }
         }
     );
@@ -160,4 +167,43 @@ function updateMinerStats() {
             }
         }
     );
+}
+
+function calcTopMinersStats(top_miners) {
+    let obj = new topMinerCallbackClass();
+    for ( let i in top_miners ) {
+        $.getJSON(
+            API_ENDPOINT + '/miner/' + top_miners[i] + '/currentStats',
+            {},
+            (data) => {
+                obj.topMinerCallback(data);
+            }
+        );
+    }
+}
+
+function topMinerCallbackClass() {
+
+    // average hashrate
+    this.average_hashrate = 0;
+    this.num_miners = 0;
+    this.sum_hashrate = 0;
+
+    // valid shares
+    this.sum_valid_shares = 0;
+    this.average_valid_shares = 0;
+
+    this.topMinerCallback = function(data) {
+        this.num_miners++;
+
+        // average hashrate
+        this.sum_hashrate += Math.round(100 * data.data.averageHashrate / 1000000) / 100;
+        this.average_hashrate = this.sum_hashrate / this.num_miners;
+        $('#top_avg_hashrate').text(this.average_hashrate);
+
+        // average valid shares
+        this.sum_valid_shares += data.data.validShares;
+        this.average_valid_shares = this.sum_valid_shares / this.num_miners;
+        $('#top_avg_valid_shares').text(this.average_valid_shares);
+    }
 }
