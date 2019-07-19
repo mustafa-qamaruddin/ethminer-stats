@@ -9,9 +9,9 @@
 .section .col {
     position: relative;
     word-wrap: break-word;
-    background-color: #fff;
+    /* background-color: #fff; */
     background-clip: border-box;
-    border: 1px solid rgba(0,0,0,.125);
+    border: 1px solid rgba(255,255,255,.125);
     border-radius: .25rem;
     width:auto;
     margin: 0.4rem 1.25rem;
@@ -67,4 +67,6 @@ p
 
   body {
       cursor: none;
+      background-color: black !important;
+      color: antiquewhite !important;
   }
