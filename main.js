@@ -2,6 +2,7 @@ const API_ENDPOINT = 'https://api.ethermine.org';
 const MINER_ADDR = '0x0C4beC0CF7aA3e3562d0f56558829C348646861b';
 const BUBBLE_UP = new Audio('./assets/sounds/bubble.mp3');
 const CRASH_DOWN = new Audio('./assets/sounds/crash.mp3');
+const SUCCESS = new Audio('./assets/sounds/success.mp3');
 
 
 $(()=>{
@@ -123,6 +124,7 @@ function timestampToDate(unix_timestamp) {
 function updateMinerStats() {
     const prev_val = Number($('.miner-stats .unpaid span').text());
     const prev_workers = Number($('.miner-stats #active-workers').text());
+    const prev_eth = Number($('.miner-stats .unpaid-eth span').text());
     $.getJSON(
         API_ENDPOINT + '/miner/' + MINER_ADDR + '/currentStats',
         {},
@@ -177,6 +179,10 @@ function updateMinerStats() {
                         1000000 * eth_val * usd_price
                     ) / 1000000
                 );
+
+                if ( eth_val > prev_eth) {
+                    SUCCESS.play();
+                }
             }
         }
     );
